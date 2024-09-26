@@ -1,0 +1,9 @@
+{
+	"name": "datafactorycapstonegs",
+	"location": "southindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "19fc2a64-4be3-4972-8c96-8edb650bb16c",
+		"tenantId": "b3f4f7c2-72ce-4192-aba4-d6c7719b5766"
+	}
+}
