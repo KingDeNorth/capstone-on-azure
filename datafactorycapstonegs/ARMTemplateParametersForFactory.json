@@ -22,6 +22,9 @@
 		},
 		"synapse_properties_typeProperties_endpoint": {
 			"value": "https://synapsegs.dev.azuresynapse.net"
+		},
+		"everytimefilearrivesinbronze_properties_typeProperties_scope": {
+			"value": "/subscriptions/fc0dd56e-dfc6-445b-973e-6d94a8c2fcda/resourceGroups/capstonegs/providers/Microsoft.Storage/storageAccounts/storageforcapstone"
 		}
 	}
 }
