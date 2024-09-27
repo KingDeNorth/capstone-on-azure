@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafactorycapstonegs"
+		},
+		"storage_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'storage'"
+		},
+		"databricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'databricks'"
+		},
+		"googledrive_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://drive.usercontent.google.com/download?id=18B6OrcpS5lVc7I-XLFh-g_jfkK1LrwMr&export=download&authuser=0&confirm=t&uuid=4bfa0bbc-d378-4929-8db4-af5b8c89175d&at=AO7h07f-fbUxi4f0zuEtF_Pph2IO%3A1726831628009"
+		},
+		"storage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storageforcapstone.dfs.core.windows.net/"
+		},
+		"synapse_properties_typeProperties_endpoint": {
+			"type": "string",
+			"defaultValue": "https://synapsegs.dev.azuresynapse.net"
+		},
+		"databricks_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0926-232628-2kwqhwce"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "datafactorycapstonegs_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"storage_accountKey": {
+						"value": "[parameters('storage_accountKey')]"
+					},
+					"databricks_accessToken": {
+						"value": "[parameters('databricks_accessToken')]"
+					},
+					"googledrive_properties_typeProperties_url": {
+						"value": "[parameters('googledrive_properties_typeProperties_url')]"
+					},
+					"storage_properties_typeProperties_url": {
+						"value": "[parameters('storage_properties_typeProperties_url')]"
+					},
+					"synapse_properties_typeProperties_endpoint": {
+						"value": "[parameters('synapse_properties_typeProperties_endpoint')]"
+					},
+					"databricks_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('databricks_properties_typeProperties_existingClusterId')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
