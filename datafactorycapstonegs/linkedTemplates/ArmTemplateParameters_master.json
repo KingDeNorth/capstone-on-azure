@@ -5,11 +5,14 @@
 		"factoryName": {
 			"value": "datafactorycapstonegs"
 		},
+		"databricks_accessToken": {
+			"value": ""
+		},
 		"storage_accountKey": {
 			"value": ""
 		},
-		"databricks_accessToken": {
-			"value": ""
+		"databricks_properties_typeProperties_existingClusterId": {
+			"value": "0926-232628-2kwqhwce"
 		},
 		"googledrive_properties_typeProperties_url": {
 			"value": "https://drive.usercontent.google.com/download?id=18B6OrcpS5lVc7I-XLFh-g_jfkK1LrwMr&export=download&authuser=0&confirm=t&uuid=4bfa0bbc-d378-4929-8db4-af5b8c89175d&at=AO7h07f-fbUxi4f0zuEtF_Pph2IO%3A1726831628009"
@@ -19,9 +22,6 @@
 		},
 		"synapse_properties_typeProperties_endpoint": {
 			"value": "https://synapsegs.dev.azuresynapse.net"
-		},
-		"databricks_properties_typeProperties_existingClusterId": {
-			"value": "0926-232628-2kwqhwce"
 		},
 		"containerUri": {
 			"value": ""

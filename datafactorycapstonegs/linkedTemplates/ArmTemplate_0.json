@@ -7,13 +7,17 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "datafactorycapstonegs"
 		},
+		"databricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'databricks'"
+		},
 		"storage_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'storage'"
 		},
-		"databricks_accessToken": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accessToken' of 'databricks'"
+		"databricks_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0926-232628-2kwqhwce"
 		},
 		"googledrive_properties_typeProperties_url": {
 			"type": "string",
@@ -26,16 +30,30 @@
 		"synapse_properties_typeProperties_endpoint": {
 			"type": "string",
 			"defaultValue": "https://synapsegs.dev.azuresynapse.net"
-		},
-		"databricks_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0926-232628-2kwqhwce"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/databricks')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-200515259455885.5.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('databricks_accessToken')]"
+					},
+					"existingClusterId": "[parameters('databricks_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/googledrive')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -84,22 +102,31 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/databricks')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/bronze')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"linkedServiceName": {
+					"referenceName": "storage",
+					"type": "LinkedServiceReference"
+				},
 				"annotations": [],
-				"type": "AzureDatabricks",
+				"type": "DelimitedText",
 				"typeProperties": {
-					"domain": "https://adb-200515259455885.5.azuredatabricks.net",
-					"accessToken": {
-						"type": "SecureString",
-						"value": "[parameters('databricks_accessToken')]"
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "bronze"
 					},
-					"existingClusterId": "[parameters('databricks_properties_typeProperties_existingClusterId')]"
-				}
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/storage')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/downloadfromdrive')]",
@@ -120,29 +147,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/googledrive')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/zippedfile')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "storage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "zippedfile",
-						"fileSystem": "simulation"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/storage')]"
 			]
 		},
 		{
@@ -211,33 +215,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/bronze')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "storage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "bronze"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/storage')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/source_retrieval')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -251,7 +228,10 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "@variables('randomvariable')",
+						"fileName": {
+							"value": "@variables('randomvariable')",
+							"type": "Expression"
+						},
 						"folderPath": "files-48",
 						"fileSystem": "simulation"
 					},
@@ -298,6 +278,29 @@
 						"type": "String"
 					}
 				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/storage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/zippedfile')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "storage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "zippedfile",
+						"fileSystem": "simulation"
+					}
+				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/storage')]"
@@ -455,6 +458,7 @@
 							],
 							"storeSettings": {
 								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
 								"enablePartitionDiscovery": false
 							},
 							"formatSettings": {
