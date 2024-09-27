@@ -1,0 +1,12 @@
+{
+	"name": "storage",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://storageforcapstone.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDlCQzIxN0M0LTlBODYtNEREOS05RTZCLUQ0Qjk2OEQ0QkY1QV8wOTk2NjE0Ni02MjRmLTQ2ZDAtYmQ3NS0xNTdjNmU5OWE5MjYiDQp9"
+		}
+	}
+}

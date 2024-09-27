@@ -1,0 +1,111 @@
+{
+	"name": "preprocessing",
+	"properties": {
+		"activities": [
+			{
+				"name": "downloadfromgoogledrive",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "downloadfromdrive",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "zippedfile",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "unzip",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "downloadfromgoogledrive",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/sneha.nmalegavi@amadeus.com/capstoneazuredf/unzipusingdatabricks"
+				},
+				"linkedServiceName": {
+					"referenceName": "databricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "splitfiles",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "unzip",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/sneha.nmalegavi@amadeus.com/capstoneazuredf/splitfiles"
+				},
+				"linkedServiceName": {
+					"referenceName": "databricks",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"variables": {
+			"randomvariable": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"name": "synapse",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSynapseArtifacts",
+		"typeProperties": {
+			"endpoint": "https://synapsegs.dev.azuresynapse.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/fc0dd56e-dfc6-445b-973e-6d94a8c2fcda/resourceGroups/capstonegs/providers/Microsoft.Synapse/workspaces/synapsegs"
+		}
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"name": "triger_every_5_mins",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pushfile",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 5,
+				"startTime": "2024-09-26T07:17:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
