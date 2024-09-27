@@ -7,13 +7,17 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "datafactorycapstonegs"
 		},
+		"databricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'databricks'"
+		},
 		"storage_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'storage'"
 		},
-		"databricks_accessToken": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accessToken' of 'databricks'"
+		"databricks_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0926-232628-2kwqhwce"
 		},
 		"googledrive_properties_typeProperties_url": {
 			"type": "string",
@@ -26,10 +30,6 @@
 		"synapse_properties_typeProperties_endpoint": {
 			"type": "string",
 			"defaultValue": "https://synapsegs.dev.azuresynapse.net"
-		},
-		"databricks_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0926-232628-2kwqhwce"
 		},
 		"containerUri": {
 			"type": "string",
@@ -58,11 +58,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"databricks_accessToken": {
+						"value": "[parameters('databricks_accessToken')]"
+					},
 					"storage_accountKey": {
 						"value": "[parameters('storage_accountKey')]"
 					},
-					"databricks_accessToken": {
-						"value": "[parameters('databricks_accessToken')]"
+					"databricks_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('databricks_properties_typeProperties_existingClusterId')]"
 					},
 					"googledrive_properties_typeProperties_url": {
 						"value": "[parameters('googledrive_properties_typeProperties_url')]"
@@ -72,9 +75,6 @@
 					},
 					"synapse_properties_typeProperties_endpoint": {
 						"value": "[parameters('synapse_properties_typeProperties_endpoint')]"
-					},
-					"databricks_properties_typeProperties_existingClusterId": {
-						"value": "[parameters('databricks_properties_typeProperties_existingClusterId')]"
 					}
 				}
 			},
