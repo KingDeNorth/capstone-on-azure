@@ -166,6 +166,9 @@
 				"type": "String"
 			}
 		},
+		"folder": {
+			"name": "simulate"
+		},
 		"annotations": []
 	}
 }
