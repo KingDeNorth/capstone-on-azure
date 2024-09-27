@@ -31,6 +31,10 @@
 			"type": "string",
 			"defaultValue": "https://synapsegs.dev.azuresynapse.net"
 		},
+		"everytimefilearrivesinbronze_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/fc0dd56e-dfc6-445b-973e-6d94a8c2fcda/resourceGroups/capstonegs/providers/Microsoft.Storage/storageAccounts/storageforcapstone"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -75,6 +79,9 @@
 					},
 					"synapse_properties_typeProperties_endpoint": {
 						"value": "[parameters('synapse_properties_typeProperties_endpoint')]"
+					},
+					"everytimefilearrivesinbronze_properties_typeProperties_scope": {
+						"value": "[parameters('everytimefilearrivesinbronze_properties_typeProperties_scope')]"
 					}
 				}
 			},

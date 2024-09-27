@@ -30,6 +30,10 @@
 		"synapse_properties_typeProperties_endpoint": {
 			"type": "string",
 			"defaultValue": "https://synapsegs.dev.azuresynapse.net"
+		},
+		"everytimefilearrivesinbronze_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/fc0dd56e-dfc6-445b-973e-6d94a8c2fcda/resourceGroups/capstonegs/providers/Microsoft.Storage/storageAccounts/storageforcapstone"
 		}
 	},
 	"variables": {
@@ -662,12 +666,43 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/triger_every_5_mins')]",
+			"name": "[concat(parameters('factoryName'), '/everytimefilearrivesinbronze')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "ETL using Databricks",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/bronze/blobs/",
+					"blobPathEndsWith": "csv",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('everytimefilearrivesinbronze_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/ETL using Databricks')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/triger_every_5_mins')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
