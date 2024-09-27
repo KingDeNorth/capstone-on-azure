@@ -24,6 +24,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -148,7 +149,8 @@
 						"linkedServiceName": {
 							"referenceName": "storage",
 							"type": "LinkedServiceReference"
-						}
+						},
+						"path": "logs"
 					},
 					"enableLogging": true,
 					"storeSettings": {
