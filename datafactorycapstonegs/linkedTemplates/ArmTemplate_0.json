@@ -115,6 +115,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"folderPath": "raw_data",
 						"fileSystem": "bronze"
 					},
 					"columnDelimiter": ",",
@@ -378,7 +379,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Repos/sneha.nmalegavi@amadeus.com/capstoneazuredf/Databricks-extract-scripts/splitfiles"
+							"notebookPath": "/Repos/sneha.nmalegavi@amadeus.com/capstoneazuredf/Databricks-extract-scripts/unzipfile"
 						},
 						"linkedServiceName": {
 							"referenceName": "databricks",
@@ -621,7 +622,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
