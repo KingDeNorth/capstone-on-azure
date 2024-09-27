@@ -378,7 +378,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/sneha.nmalegavi@amadeus.com/capstoneazuredf/unzipusingdatabricks"
+							"notebookPath": "/Repos/sneha.nmalegavi@amadeus.com/capstoneazuredf/Databricks-extract-scripts/splitfiles"
 						},
 						"linkedServiceName": {
 							"referenceName": "databricks",
@@ -405,7 +405,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/sneha.nmalegavi@amadeus.com/capstoneazuredf/splitfiles"
+							"notebookPath": "/Repos/sneha.nmalegavi@amadeus.com/capstoneazuredf/Databricks-extract-scripts/splitfiles"
 						},
 						"linkedServiceName": {
 							"referenceName": "databricks",
@@ -586,7 +586,8 @@
 								"linkedServiceName": {
 									"referenceName": "storage",
 									"type": "LinkedServiceReference"
-								}
+								},
+								"path": "logs"
 							},
 							"enableLogging": true,
 							"storeSettings": {
