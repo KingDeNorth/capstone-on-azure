@@ -108,7 +108,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/sneha.nmalegavi@amadeus.com/capstoneazuredf/unzipusingdatabricks"
+							"notebookPath": "/Repos/sneha.nmalegavi@amadeus.com/capstoneazuredf/Databricks-extract-scripts/splitfiles"
 						},
 						"linkedServiceName": {
 							"referenceName": "databricks",
@@ -135,7 +135,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Users/sneha.nmalegavi@amadeus.com/capstoneazuredf/splitfiles"
+							"notebookPath": "/Repos/sneha.nmalegavi@amadeus.com/capstoneazuredf/Databricks-extract-scripts/splitfiles"
 						},
 						"linkedServiceName": {
 							"referenceName": "databricks",
@@ -621,7 +621,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
